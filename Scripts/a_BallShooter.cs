@@ -11,6 +11,15 @@ public class a_BallShooter : MonoBehaviour
     private Rigidbody ballRigidbody; // 現在のボールのRigidbodyコンポーネント
     private float holdTime; // マウスボタンが押されている時間
 
+    public AudioClip Pass; // シュートの効果音
+    private AudioSource audioSource; // AudioSourceコンポーネント
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // AudioSourceコンポーネントを取得
+    }
+
+
     void Update()
     {
         // 左クリックを押し続けている間の時間を計測
@@ -24,6 +33,7 @@ public class a_BallShooter : MonoBehaviour
         {
             ShootBall(); // ボールを発射
             holdTime = 0f; // 長押し時間をリセット
+            audioSource.PlayOneShot(Pass); // 効果音を再生
         }
     }
 
